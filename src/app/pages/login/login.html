@@ -1,0 +1,25 @@
+<div class="d-flex vh-100 justify-content-center align-items-center bg-light">
+
+  <div class="card shadow p-4" style="width: 360px;">
+    
+    <h4 class="text-center mb-3">Parent Intake Portal</h4>
+
+    <p class="text-muted text-center mb-4">
+      Please enter your name to continue
+    </p>
+
+    <input
+      [(ngModel)]="username"
+      class="form-control mb-3"
+      placeholder="Enter your name (e.g. admin)"
+    />
+
+    <button 
+      class="btn btn-primary w-100"
+      (click)="login()">
+      Continue
+    </button>
+
+  </div>
+
+</div>

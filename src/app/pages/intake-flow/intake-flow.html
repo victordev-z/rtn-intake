@@ -1,0 +1,91 @@
+<div class="container mt-5" style="max-width: 600px;">
+
+  <!-- HEADER -->
+  <div class="mb-4">
+
+    <div class="d-flex justify-content-between">
+      <h5 class="mb-0">
+        Step {{ intake.currentStep }} of {{ intake.forms.length }}
+      </h5>
+      <small class="text-muted">
+        {{ ((intake.currentStep) / intake.forms.length * 100) | number:'1.0-0' }}%
+      </small>
+    </div>
+
+    <div class="progress mt-2">
+      <div 
+        class="progress-bar"
+        role="progressbar"
+        [style.width.%]="(intake.currentStep / intake.forms.length) * 100">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMPLETED -->
+  <div *ngIf="intake.currentStep === intake.forms.length" class="text-center mt-5">
+    
+    <h3 class="mb-3">✅ All forms completed</h3>
+    <p class="text-muted">Thank you for completing the intake packet.</p>
+
+  </div>
+
+  <!-- FORM -->
+  <div *ngIf="intake.currentStep < intake.forms.length">
+
+    <div class="card shadow-sm p-4">
+
+      <h5 class="mb-3">
+        {{ intake.forms[intake.currentStep].title }}
+      </h5>
+
+      <!-- REQUIRED FIELD -->
+      <div class="mb-3">
+        <label class="form-label">
+          Parent Full Name <span class="text-danger">*</span>
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="signature"
+          class="form-control"
+          placeholder="Enter your full name"
+        />
+      </div>
+
+      <!-- CHECKBOX -->
+      <div class="form-check mb-4">
+        <input 
+          class="form-check-input"
+          type="checkbox"
+          [(ngModel)]="agreed"
+          id="agreeCheck"
+        />
+        <label class="form-check-label" for="agreeCheck">
+          I confirm that the information is correct and I agree to sign this form
+        </label>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="d-flex justify-content-between">
+
+        <button 
+          class="btn btn-outline-secondary"
+          (click)="prev()"
+          [disabled]="intake.currentStep === 0">
+          Back
+        </button>
+
+        <button 
+          class="btn btn-primary"
+          (click)="next()"
+          [disabled]="!isValid()">
+          Sign & Continue
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
